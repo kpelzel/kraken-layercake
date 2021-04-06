@@ -120,7 +120,7 @@ install -D -m 0644 utils/rpm/state.json %{buildroot}%{_sysconfdir}/kraken/layerc
 install -D -m 0644 layercake-config.yaml %{buildroot}%{_sysconfdir}/kraken/layercake/config.yaml
 %if %{with vbox}
 # kraken-layercake-vbox
-install -D -m 0755 kraken-layercake-vbox %{buildroot}%{_sbindir}/kraken-layercake-vbox
+install -D -m 0755 kraken-layercake-virt %{buildroot}%{_sbindir}/kraken-layercake-virt
 install -D -m 0644 kraken-layercake-vbox.service %{buildroot}%{_unitdir}/kraken-layercake-vbox.service
 install -D -m 0644 utils/rpm/state.json %{buildroot}%{_sysconfdir}/kraken/layercake-vbox/state.json
 install -D -m 0644 layercake-vbox-config.yaml %{buildroot}%{_sysconfdir}/kraken/layercake-vbox/config.yaml
