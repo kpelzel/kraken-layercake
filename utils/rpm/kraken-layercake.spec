@@ -86,7 +86,7 @@ GOARCH=%{GoBuildArch} go build ./cmd/kraken-layercake
 %if %{with vbox}
 (
   GOARCH=%{GoBuildArch} go build ./cmd/kraken-layercake-virt
-  ./kraken-layercake-vbox -state "/etc/kraken/layercake-vbox/state.json" -noprefix -sdnotify -printrc > layercake-vbox-config.yaml
+  ./kraken-layercake-virt -state "/etc/kraken/layercake-vbox/state.json" -noprefix -sdnotify -printrc > layercake-vbox-config.yaml
 )
 %endif
 
