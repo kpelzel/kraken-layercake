@@ -85,7 +85,7 @@ GOARCH=%{GoBuildArch} go build ./cmd/kraken-layercake
 
 %if %{with vbox}
 (
-  GOARCH=%{GoBuildArch} go build ./cmd/kraken-layercake-vbox
+  GOARCH=%{GoBuildArch} go build ./cmd/kraken-layercake-virt
   ./kraken-layercake-vbox -state "/etc/kraken/layercake-vbox/state.json" -noprefix -sdnotify -printrc > layercake-vbox-config.yaml
 )
 %endif
@@ -105,7 +105,7 @@ bash utils/layer0/build-layer0-base.sh -k -t /tmp/layer0-base -o layer0-base-%{G
 %if %{with vbox}
 # build an initramfs that has kraken-layercake-vbox in it
 # note: still has non-vbox version too
-bash utils/layer0/build-layer0-base.sh -k -t /tmp/layer0-base -o layer0-vbox-base-%{GoBuildArch}.xz %{GoBuildArch} github.com/kraken-hpc/kraken-layercake/cmd/kraken-layercake-vbox
+bash utils/layer0/build-layer0-base.sh -k -t /tmp/layer0-base -o layer0-vbox-base-%{GoBuildArch}.xz %{GoBuildArch} github.com/kraken-hpc/kraken-layercake/cmd/kraken-layercake-virt
 
 %endif
 rm -rf /tmp/layer0-base
