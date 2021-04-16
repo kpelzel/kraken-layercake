@@ -6,7 +6,6 @@ parent_nm = ENV['KRAKEN_PARENT_NETMASK'] || '255.255.255.0'
 $script = <<-SCRIPT
 echo "Installing some prerequisits to run ansible locally"
 dnf -y --nogpgcheck install ansible python3-netaddr
-ansible-galaxy collection install containers.podman
 SCRIPT
 
 Vagrant.require_version ">= 2.0.0"
@@ -46,5 +45,7 @@ Vagrant.configure("2") do |config|
     ansible.install = false
     ansible.verbose = false
     ansible.playbook = "ansible/kraken.yml"
+    ansible.galaxy_role_file = "ansible/requirements.yml"
+    ansible.galaxy_command = "ansible-galaxy collection install --requirements-file %{role_file}"
   end
 end
