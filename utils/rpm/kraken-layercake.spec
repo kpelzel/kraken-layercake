@@ -86,7 +86,7 @@ GOARCH=%{GoBuildArch} go build ./cmd/kraken-layercake
 %if %{with vbox}
 (
   GOARCH=%{GoBuildArch} go build ./cmd/kraken-layercake-virt
-  ./kraken-layercake-virt -state "/etc/kraken/layercake-vbox/state.json" -noprefix -sdnotify -printrc > layercake-vbox-config.yaml
+  ./kraken-layercake-virt -state "/etc/kraken/layercake-virt/state.json" -noprefix -sdnotify -printrc > layercake-virt-config.yaml
 )
 %endif
 
@@ -103,7 +103,7 @@ GOARCH=%{GoBuildArch} go build ./cmd/kraken-layercake
 bash utils/layer0/build-layer0-base.sh -k -t /tmp/layer0-base -o layer0-base-%{GoBuildArch}.xz %{GoBuildArch}
 
 %if %{with vbox}
-# build an initramfs that has kraken-layercake-vbox in it
+# build an initramfs that has kraken-layercake-virt in it
 # note: still has non-vbox version too
 bash utils/layer0/build-layer0-base.sh -k -t /tmp/layer0-base -o layer0-vbox-base-%{GoBuildArch}.xz %{GoBuildArch} github.com/kraken-hpc/kraken-layercake/cmd/kraken-layercake-virt
 
@@ -119,11 +119,11 @@ install -D -m 0644 kraken-layercake.service %{buildroot}%{_unitdir}/kraken-layer
 install -D -m 0644 utils/rpm/state.json %{buildroot}%{_sysconfdir}/kraken/layercake/state.json
 install -D -m 0644 layercake-config.yaml %{buildroot}%{_sysconfdir}/kraken/layercake/config.yaml
 %if %{with vbox}
-# kraken-layercake-vbox
+# kraken-layercake-virt
 install -D -m 0755 kraken-layercake-virt %{buildroot}%{_sbindir}/kraken-layercake-virt
 install -D -m 0644 kraken-layercake-virt.service %{buildroot}%{_unitdir}/kraken-layercake-virt.service
-install -D -m 0644 utils/rpm/state.json %{buildroot}%{_sysconfdir}/kraken/layercake-vbox/state.json
-install -D -m 0644 layercake-vbox-config.yaml %{buildroot}%{_sysconfdir}/kraken/layercake-vbox/config.yaml
+install -D -m 0644 utils/rpm/state.json %{buildroot}%{_sysconfdir}/kraken/layercake-virt/state.json
+install -D -m 0644 layercake-virt-config.yaml %{buildroot}%{_sysconfdir}/kraken/layercake-virt/config.yaml
 # vboxapi
 install -D -m 0755 utils/vboxapi/vboxapi %{buildroot}%{_sbindir}/vboxapi
 install -D -m 0644 vboxapi.service %{buildroot}%{_unitdir}/vboxapi.service
@@ -149,8 +149,8 @@ install -D -m 0644 layer0-vbox-base-%{GoBuildArch}.xz %{buildroot}/tftp/layer0-v
 %files vbox
 %license LICENSE
 %{_sbindir}/kraken-layercake-virt
-%config(noreplace) %{_sysconfdir}/kraken/layercake-vbox/state.json
-%config(noreplace) %{_sysconfdir}/kraken/layercake-vbox/config.yaml
+%config(noreplace) %{_sysconfdir}/kraken/layercake-virt/state.json
+%config(noreplace) %{_sysconfdir}/kraken/layercake-virt/config.yaml
 %{_unitdir}/kraken-layercake-virt.service
 
 %files vboxapi

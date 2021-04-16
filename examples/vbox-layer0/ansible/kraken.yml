@@ -6,9 +6,8 @@
     kr_build_args: "-v -force"
   roles:
     - common
-    - kraken_build
+    - kraken_podman
     - kraken_tftpboot
-    - kraken_build_layer0
     - kraken_state
     - kraken_systemd
     - kraken_dashboard
